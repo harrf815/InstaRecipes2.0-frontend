@@ -20,8 +20,19 @@ const signup = data => {
     .then(res => res.json())
 }
 
+const getCurrentUser = () => {
+    return fetch(`${URL}/profile`, {
+        method: "GET",
+        headers: {
+            Authorization: `${localStorage.token}`
+        }
+    })
+    .then(res => res.json())
+}
+
 export const API = {
     auth: {
         signup, 
+        getCurrentUser,
     }
 }
