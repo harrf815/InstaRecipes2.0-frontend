@@ -1,45 +1,32 @@
 
 import React, { useState } from 'react';
 
+
 import { Form, Button } from 'semantic-ui-react'
+import { API } from '../services/Api';
 
-import { API } from '../services/Api'
+const Login = props => {
 
-const Signup = (props) => {
-
-    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleSumbit = e => {
+    const handleSubmit = e => {
         e.preventDefault()
-
         const user = {
-            name,
             email,
             password
         }
-        API.auth.signup(user).then(data => props.createAccount(data))
-        
-
+        API.auth.login(user).then(data => props.login(data))
     }
 
     return (
         <div>
             <div>
-                <Form onSubmit={ e => handleSumbit(e) }>
+                <Form onSubmit={ e => handleSubmit(e) }>
                     <div>
-                        <Form.Input 
-                            label="Name"
-                            type="text"
-                            icon="user"
-                            iconPosition="left"
-                            onChange={ e => setName(e.target.value) }
-                        />
-                    </div>
-                    <div>
-                        <Form.Input 
+                        <Form.Input
                             label="Email"
+                            name="email"
                             type="text"
                             icon="envelope"
                             iconPosition="left"
@@ -50,13 +37,13 @@ const Signup = (props) => {
                         <Form.Input 
                             label="Password"
                             type="password"
-                            iconPosition="left"
                             icon="lock"
+                            iconPosition="left"
                             onChange={ e => setPassword(e.target.value) }
                         />
                     </div>
                     <div>
-                        <Button id="submitbtn" primary>Create Account</Button>
+                        <Button className="submitbtn" primary>Login</Button>
                     </div>
                 </Form>
             </div>
@@ -64,4 +51,4 @@ const Signup = (props) => {
     )
 }
 
-export default Signup; 
+export default Login;

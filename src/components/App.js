@@ -1,12 +1,14 @@
 
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 
 import { API } from '../services/Api';
 import Header from './Header'
 import Signup from './Signup'
+import Login from './Login'
+import Home from './Home'
 
-const App = () => {
+const App = props => {
 
     const [currentUser, setCurrentUser] = useState( {} )
 
@@ -15,21 +17,32 @@ const App = () => {
         const token = localStorage.token
 
         if (token) {
-            API.auth.getCurrentUser().then(data => setCurrentUser(data))
+            API.auth.getCurrentUser().then(data => {
+                console.log(data)
+                setCurrentUser(data)})
         }
-        
     }, [] )
 
     //! Signup
     const createAccount = data => {
-        const userState = setCurrentUser(data)
         localStorage.setItem('token', data.token)
-        console.log(userState)
+        setCurrentUser(data)
+        const token = localStorage.token
+        if ( token && token !== "undefined") {
+            props.history.push("/")
+        }
+       
     }
 
     //! Login
     const login = data => {
-        console.log(data)
+        localStorage.setItem('token', data.token)
+        setCurrentUser(data)
+        const token = localStorage.token
+        if ( token && token !== "undefined") {
+            props.history.push("/")
+        }
+
     }
 
     //! Logout 
@@ -40,23 +53,27 @@ const App = () => {
 
 
     //! Components
+    const handleHome = () => <Home />
     const handleSignup = () => <Signup createAccount={createAccount} />
+    const handleLogin = () => <Login login={login} />
 
     
 
         return (
             <div>
-                <BrowserRouter>
+                <>
                     <div>
-                        <Header />
+                        <Header logout={logout} currentUser={currentUser}/>
                         <div className="main ui container">
-                            <Route path="/signup" exact component={handleSignup}/>
+                            <Route path="/" exact component={handleHome} />
+                            <Route path="/signup" exact component={handleSignup} />
+                            <Route path="/login" exact component={handleLogin} />
                         </div>
                     </div>
-                </BrowserRouter>
+                </>
             </div>
         )
     
 }
 
-export default App; 
+export default withRouter(App); 

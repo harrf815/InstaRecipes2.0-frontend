@@ -20,6 +20,15 @@ const signup = data => {
     .then(res => res.json())
 }
 
+const login = data => {
+    return fetch(`${URL}/login`, {
+        method: 'POST',
+        headers: headers(),
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+}
+
 const getCurrentUser = () => {
     return fetch(`${URL}/profile`, {
         method: "GET",
@@ -34,5 +43,6 @@ export const API = {
     auth: {
         signup, 
         getCurrentUser,
+        login
     }
 }
