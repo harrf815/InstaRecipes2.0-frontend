@@ -19,7 +19,9 @@ const Signup = (props) => {
             email,
             password
         }
-        API.auth.signup(user).then(data => props.createAccount(data))
+        API.auth.signup(user).then(data => {
+            props.createAccount(data)
+        })
         
 
     }
@@ -31,6 +33,7 @@ const Signup = (props) => {
                     <div>
                         <Form.Input 
                             label="Name"
+                            name="name"
                             type="text"
                             icon="user"
                             iconPosition="left"
@@ -40,6 +43,7 @@ const Signup = (props) => {
                     <div>
                         <Form.Input 
                             label="Email"
+                            name="email"
                             type="text"
                             icon="envelope"
                             iconPosition="left"
@@ -49,6 +53,7 @@ const Signup = (props) => {
                     <div>
                         <Form.Input 
                             label="Password"
+                            name="password"
                             type="password"
                             iconPosition="left"
                             icon="lock"

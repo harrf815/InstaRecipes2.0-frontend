@@ -7,31 +7,30 @@ import Header from './Header'
 import Signup from './Signup'
 import Login from './Login'
 import Home from './Home'
+import Recipe from './Recipe'
 
 const App = props => {
 
-    const [currentUser, setCurrentUser] = useState( {} )
+    const [currentUser, setCurrentUser] = useState('')
 
     //! Get Current User
     useEffect (() => {
         const token = localStorage.token
-
-        if (token) {
-            API.auth.getCurrentUser().then(data => {
-                console.log(data)
-                setCurrentUser(data)})
+        if (token && token !=="undefined") {
+            API.auth.getCurrentUser().then(data =>  setCurrentUser(data) )
         }
-    }, [] )
+    }, [])
 
     //! Signup
     const createAccount = data => {
         localStorage.setItem('token', data.token)
         setCurrentUser(data)
         const token = localStorage.token
-        if ( token && token !== "undefined") {
+        if (token && token !== "undefined") {
             props.history.push("/")
+           
+            
         }
-       
     }
 
     //! Login
@@ -39,16 +38,17 @@ const App = props => {
         localStorage.setItem('token', data.token)
         setCurrentUser(data)
         const token = localStorage.token
-        if ( token && token !== "undefined") {
+        if (token && token !== "undefined") {
             props.history.push("/")
         }
-
     }
 
     //! Logout 
     const logout = () => {
-        localStorage.clear()
+        localStorage.removeItem('token')
         setCurrentUser({})
+        window.history.pushState({}, '', '/')
+        window.location.reload()
     }
 
 
@@ -56,6 +56,7 @@ const App = props => {
     const handleHome = () => <Home />
     const handleSignup = () => <Signup createAccount={createAccount} />
     const handleLogin = () => <Login login={login} />
+    const handleRecipe = () => <Recipe />
 
     
 
@@ -68,6 +69,7 @@ const App = props => {
                             <Route path="/" exact component={handleHome} />
                             <Route path="/signup" exact component={handleSignup} />
                             <Route path="/login" exact component={handleLogin} />
+                            <Route path="/recipe" exact component={handleRecipe} />
                         </div>
                     </div>
                 </>

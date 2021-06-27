@@ -36,6 +36,7 @@ const Login = props => {
                     <div>
                         <Form.Input 
                             label="Password"
+                            name="password"
                             type="password"
                             icon="lock"
                             iconPosition="left"
