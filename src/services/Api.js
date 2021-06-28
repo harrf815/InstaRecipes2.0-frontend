@@ -11,6 +11,8 @@ const headers = () => {
     }
 }
 
+//! Auth
+
 const signup = data => {
     return fetch(`${URL}/signup`, {
         method: 'POST',
@@ -39,10 +41,24 @@ const getCurrentUser = () => {
     .then(res => res.json())
 }
 
+//! Recipes
+
+const addRecipes = data => {
+    return fetch(`${URL}/recipes`, {
+        method: 'POST',
+        headers: headers(),
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+}
+
 export const API = {
     auth: {
         signup, 
         getCurrentUser,
         login
+    },
+    recipes: {
+        addRecipes,
     }
 }

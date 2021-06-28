@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Header = props => {
     const loggedIn = !!props.currentUser._id
     const currentUser = props.currentUser
-    console.log(props.currentUser)
+    console.log(currentUser)
 
     return (
 
