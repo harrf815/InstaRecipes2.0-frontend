@@ -1,0 +1,46 @@
+
+
+/* //! Cards  ----------------------------------- */
+
+.cards {
+    display: inline-block;
+    padding: 10px;
+}
+
+.like-button-div {
+    display: inline-block;
+}
+
+.recipe-name {
+    display: inline-block;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.count-button {
+    float: right;
+}
+
+.likes-count {
+    display: inline-block;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.backside {
+    overflow: auto;
+}
+
+.directions {
+    margin-top: 20px;
+}
+
+h4 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.recipe-image {
+    width: 280px;
+    height: 280px;
+}

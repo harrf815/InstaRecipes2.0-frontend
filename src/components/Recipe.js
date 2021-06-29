@@ -55,7 +55,7 @@ const Recipe = () => {
                 <div>
                     <Form.Input 
                         label="Image"
-                        type="file"
+                        placeholder="Please place your image URL"
                         name="image"
                         onChange={ e => setImage(e.target.value) }
                     />

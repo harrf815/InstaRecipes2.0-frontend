@@ -52,6 +52,13 @@ const addRecipes = data => {
     .then(res => res.json())
 }
 
+const getRecipes = () => {
+    return fetch (`${URL}/recipes`, {
+        method: 'GET'
+    })
+    .then(res => res.json())
+}
+
 export const API = {
     auth: {
         signup, 
@@ -60,5 +67,6 @@ export const API = {
     },
     recipes: {
         addRecipes,
+        getRecipes, 
     }
 }
